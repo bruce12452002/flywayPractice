@@ -1,0 +1,1 @@
+INSERT INTO USERS VALUES (3, 'xxx', 777, '');

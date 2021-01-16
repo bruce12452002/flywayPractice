@@ -1,0 +1,2 @@
+ALTER TABLE `flyway_db`.`users`
+ADD COLUMN `SALARY` INT(6) NULL AFTER `USERNAME`;

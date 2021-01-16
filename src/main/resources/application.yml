@@ -4,17 +4,20 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/flyway_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    password: root
-    username: 123456
+    username: root
+    password: 123456
   jpa:
     show-sql: true
   flyway:
-    enabled: true
-    url: jdbc:mysql://localhost:3306/flyway_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    user: root
-    password: 123456
-    locations: classpath:db/migration
-    check-location: true
+    enabled: true # flyway 的開關，一關就等同沒有 flyway
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:db/migration # 預設會在這個路徑找 sql 檔，多個可用逗號隔開
+    check-location: true # 檢查 locations 設定的路徑存不存在
+    encoding: utf-8 # 預設就是 utf-8
+    table: flyway_schema_history #預設就是這張表，可以改
 
-    #baseline-on-migrate: true
-    #baseline-version: 1
+    baseline-on-migrate: true # 如果 table 的表已有，又改了表，在資料庫就會有兩張表，這時就要為 true
+    baseline-version: 65 # baseline-on-migrate 為 true ，且真的有執行才有用，預設是 1，
+                         #table 有 version 欄位，會從這個版本開始往上增加，<=這個版本的sql不會執行
