@@ -14,6 +14,7 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     locations: classpath:db/migration # 預設會在這個路徑找 sql 檔，多個可用逗號隔開
+    sql-migration-suffixes: [.sql] # locations 下的什麼副檔名會執行，預設就是 .sql
     check-location: true # 檢查 locations 設定的路徑存不存在
     encoding: utf-8 # 預設就是 utf-8
     table: flyway_schema_history #預設就是這張表，可以改
